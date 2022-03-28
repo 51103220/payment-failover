@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package com.sacombank.payment;
+option java_multiple_files = true;
+option java_package = "com.sacombank.payment.domain.protobuf";
+
+message PaymentEvent  {
+	PaymentEventMetadata Metadata = 1;
+	
+	string RequestId = 2;
+	string Timestamp = 3;
+	string MTI = 4;
+	string ProcessingCode = 5;
+	bytes Payload  = 6;
+}
+
+message PaymentEventMetadata {
+	string FromChannel = 1;
+	string FlowId = 2;
+	string Timestamp = 3;
+	string State = 4;
+	PaymentTargetState NextStates = 5;
+
+	string ReplyTo = 6;
+	string ResponseCode = 7;
+	string Additional = 8;
+
+	string Signature = 9;
+}
+
+message PaymentTargetState {
+	string Success = 1;
+	string Failed = 2 ;
+	string TimedOut = 3;
+}
